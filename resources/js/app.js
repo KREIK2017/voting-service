@@ -1,5 +1,1 @@
-import Alpine from 'alpinejs';
-
-window.Alpine = Alpine;
-
-Alpine.start();
+// Bootstrap 5 JS is loaded via CDN in the layouts.

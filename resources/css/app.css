@@ -1,3 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Custom styles on top of Bootstrap 5 (loaded via CDN). */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.brand-mark {
+    font-weight: 700;
+    letter-spacing: -0.01em;
+}
