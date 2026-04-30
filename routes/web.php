@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\OptionController as AdminOptionController;
 use App\Http\Controllers\Admin\PollController as AdminPollController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
@@ -34,6 +35,17 @@ Route::middleware(['auth', 'verified', 'role:admin'])
     ->name('admin.')
     ->group(function () {
         Route::resource('polls', AdminPollController::class);
+
+        Route::get('polls/{poll}/options/create', [AdminOptionController::class, 'create'])
+            ->name('polls.options.create');
+        Route::post('polls/{poll}/options', [AdminOptionController::class, 'store'])
+            ->name('polls.options.store');
+        Route::get('options/{option}/edit', [AdminOptionController::class, 'edit'])
+            ->name('options.edit');
+        Route::put('options/{option}', [AdminOptionController::class, 'update'])
+            ->name('options.update');
+        Route::delete('options/{option}', [AdminOptionController::class, 'destroy'])
+            ->name('options.destroy');
     });
 
 require __DIR__.'/auth.php';

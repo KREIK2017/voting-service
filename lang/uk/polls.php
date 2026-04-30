@@ -73,6 +73,7 @@ return [
         'option_created' => 'Варіант додано.',
         'option_updated' => 'Варіант оновлено.',
         'option_deleted' => 'Варіант видалено.',
+        'cant_delete_option_with_votes' => 'Не можна видалити варіант з голосами.',
         'vote_recorded' => 'Ваш голос зараховано.',
         'vote_already' => 'Ви вже голосували за цей варіант.',
         'vote_not_active' => 'Голосування неактивне.',

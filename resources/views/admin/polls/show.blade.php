@@ -33,10 +33,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h2 class="h5 mb-0">{{ __('polls.show.options') }}</h2>
-                        <button class="btn btn-sm btn-outline-primary" disabled
-                                title="{{ __('polls.actions.add_option') }} ({{ __('messages.common.no_data') }})">
+                        <a href="{{ route('admin.polls.options.create', $poll) }}"
+                           class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-plus-lg me-1"></i>{{ __('polls.actions.add_option') }}
-                        </button>
+                        </a>
                     </div>
 
                     @if ($poll->options->isEmpty())
@@ -45,19 +45,79 @@
                             {{ __('polls.show.no_options') }}
                         </div>
                     @else
-                        <ul class="list-group list-group-flush">
+                        @php $totalVotes = $poll->votesCount(); @endphp
+                        <div class="d-flex flex-column gap-3">
                             @foreach ($poll->options as $option)
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    <div>
-                                        <span class="badge bg-light text-dark me-2">#{{ $option->order }}</span>
-                                        {{ $option->text }}
+                                @php
+                                    $count = $option->votesCount();
+                                    $pct = $totalVotes > 0 ? round($count / $totalVotes * 100, 1) : 0;
+                                @endphp
+                                <div>
+                                    <div class="d-flex justify-content-between align-items-center mb-1">
+                                        <div class="d-flex align-items-center gap-2 flex-grow-1 me-3 min-w-0">
+                                            <span class="badge bg-light text-dark">#{{ $option->order }}</span>
+                                            <span class="text-truncate">{{ $option->text }}</span>
+                                        </div>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <small class="text-muted text-nowrap">
+                                                {{ $count }} · {{ $pct }}%
+                                            </small>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <a href="{{ route('admin.options.edit', $option) }}"
+                                                   class="btn btn-outline-primary"
+                                                   title="{{ __('polls.actions.edit_option') }}">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <button type="button" class="btn btn-outline-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#deleteOpt{{ $option->id }}"
+                                                        title="{{ __('polls.actions.delete_option') }}">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <small class="text-muted">
-                                        {{ __('polls.list.votes_count', ['count' => $option->votes()->count()]) }}
-                                    </small>
-                                </li>
+                                    <div class="progress" role="progressbar"
+                                         aria-label="{{ $option->text }}"
+                                         aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"
+                                         style="height: 8px;">
+                                        <div class="progress-bar" style="width: {{ $pct }}%"></div>
+                                    </div>
+                                </div>
+
+                                <div class="modal fade" id="deleteOpt{{ $option->id }}" tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form method="POST" action="{{ route('admin.options.destroy', $option) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">{{ __('polls.actions.delete_option') }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p class="mb-1"><strong>{{ $option->text }}</strong></p>
+                                                    @if ($totalVotes > 0)
+                                                        <div class="alert alert-warning small mb-0 mt-2">
+                                                            <i class="bi bi-exclamation-triangle me-1"></i>
+                                                            {{ __('polls.flash.cant_delete_option_with_votes') }}
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                        {{ __('messages.common.cancel') }}
+                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" {{ $totalVotes > 0 ? 'disabled' : '' }}>
+                                                        <i class="bi bi-trash me-1"></i>{{ __('messages.common.delete') }}
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             @endforeach
-                        </ul>
+                        </div>
                     @endif
                 </div>
             </div>

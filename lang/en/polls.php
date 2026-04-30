@@ -73,6 +73,7 @@ return [
         'option_created' => 'Option added.',
         'option_updated' => 'Option updated.',
         'option_deleted' => 'Option deleted.',
+        'cant_delete_option_with_votes' => 'Cannot delete an option that already has votes.',
         'vote_recorded' => 'Your vote has been recorded.',
         'vote_already' => 'You have already voted for this option.',
         'vote_not_active' => 'This poll is not active.',
