@@ -57,13 +57,35 @@ return [
         'select_one' => 'Pick one option',
         'select_multiple' => 'You may pick multiple options',
         'submit_vote' => 'Cast vote',
+        'view_results' => 'View results',
+        'go_vote' => 'Go to vote',
     ],
 
     'results' => [
+        'heading' => 'Poll results',
         'total_votes' => 'Total votes: :count',
         'percentage' => ':percent%',
         'no_votes' => 'No votes yet.',
         'voters_list' => 'Who voted',
+        'your_choice' => 'Your choice',
+        'back_to_polls' => 'Back to polls',
+    ],
+
+    'my' => [
+        'heading' => 'My votes',
+        'empty' => "You haven't voted anywhere yet.",
+        'col_poll' => 'Poll',
+        'col_option' => 'Your choice',
+        'col_date' => 'Date',
+    ],
+
+    'admin_votes' => [
+        'heading' => 'Who voted',
+        'col_user' => 'User',
+        'col_email' => 'Email',
+        'col_option' => 'Option',
+        'col_date' => 'Date',
+        'empty' => 'No votes yet.',
     ],
 
     'flash' => [

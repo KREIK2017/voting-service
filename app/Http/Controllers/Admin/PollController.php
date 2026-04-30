@@ -83,4 +83,16 @@ class PollController extends Controller
             ->route('admin.polls.index')
             ->with('success', __('polls.flash.deleted'));
     }
+
+    public function votes(Poll $poll): View
+    {
+        Gate::authorize('view', $poll);
+
+        $votes = $poll->votes()
+            ->with(['user', 'option'])
+            ->latest()
+            ->paginate(20);
+
+        return view('admin.polls.votes', compact('poll', 'votes'));
+    }
 }

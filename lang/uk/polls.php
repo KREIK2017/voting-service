@@ -57,13 +57,35 @@ return [
         'select_one' => 'Оберіть один варіант',
         'select_multiple' => 'Можна обрати кілька варіантів',
         'submit_vote' => 'Віддати голос',
+        'view_results' => 'Дивитись результати',
+        'go_vote' => 'Перейти до голосування',
     ],
 
     'results' => [
+        'heading' => 'Результати голосування',
         'total_votes' => 'Усього голосів: :count',
         'percentage' => ':percent%',
         'no_votes' => 'Голосів ще немає.',
         'voters_list' => 'Список тих, хто голосував',
+        'your_choice' => 'Ваш вибір',
+        'back_to_polls' => 'До списку голосувань',
+    ],
+
+    'my' => [
+        'heading' => 'Мої голоси',
+        'empty' => 'Ви ще ніде не голосували.',
+        'col_poll' => 'Голосування',
+        'col_option' => 'Ваш варіант',
+        'col_date' => 'Дата',
+    ],
+
+    'admin_votes' => [
+        'heading' => 'Хто голосував',
+        'col_user' => 'Користувач',
+        'col_email' => 'Email',
+        'col_option' => 'Варіант',
+        'col_date' => 'Дата',
+        'empty' => 'Голосів ще немає.',
     ],
 
     'flash' => [

@@ -51,6 +51,7 @@
                                 @php
                                     $count = $option->votesCount();
                                     $pct = $totalVotes > 0 ? round($count / $totalVotes * 100, 1) : 0;
+                                    $progressStyle = 'width: '.$pct.'%';
                                 @endphp
                                 <div>
                                     <div class="d-flex justify-content-between align-items-center mb-1">
@@ -81,7 +82,7 @@
                                          aria-label="{{ $option->text }}"
                                          aria-valuenow="{{ $pct }}" aria-valuemin="0" aria-valuemax="100"
                                          style="height: 8px;">
-                                        <div class="progress-bar" style="width: {{ $pct }}%"></div>
+                                        <div class="progress-bar" style="{{ $progressStyle }}"></div>
                                     </div>
                                 </div>
 
@@ -128,12 +129,10 @@
                 <div class="card-body">
                     <h2 class="h6 text-muted text-uppercase">{{ __('messages.common.actions') }}</h2>
                     <div class="d-grid gap-2">
-                        <a href="#" class="btn btn-outline-secondary disabled"
-                           aria-disabled="true" title="{{ __('messages.common.no_data') }}">
+                        <a href="{{ route('polls.results', $poll) }}" class="btn btn-outline-secondary">
                             <i class="bi bi-graph-up me-1"></i>{{ __('polls.actions.results') }}
                         </a>
-                        <a href="#" class="btn btn-outline-secondary disabled"
-                           aria-disabled="true" title="{{ __('messages.common.no_data') }}">
+                        <a href="{{ route('admin.polls.votes', $poll) }}" class="btn btn-outline-secondary">
                             <i class="bi bi-people me-1"></i>{{ __('polls.actions.view_voters') }}
                         </a>
                     </div>

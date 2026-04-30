@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\OptionController as AdminOptionController;
 use App\Http\Controllers\Admin\PollController as AdminPollController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VoteController;
 use App\Models\Poll;
 use Illuminate\Support\Facades\Route;
 
@@ -30,11 +31,22 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/polls', [VoteController::class, 'index'])->name('polls.index');
+    Route::get('/polls/{poll}', [VoteController::class, 'show'])->name('polls.show');
+    Route::post('/polls/{poll}/vote', [VoteController::class, 'vote'])->name('polls.vote');
+    Route::get('/polls/{poll}/results', [VoteController::class, 'results'])->name('polls.results');
+    Route::get('/my-votes', [VoteController::class, 'myVotes'])->name('votes.my');
+});
+
 Route::middleware(['auth', 'verified', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::resource('polls', AdminPollController::class);
+
+        Route::get('polls/{poll}/votes', [AdminPollController::class, 'votes'])
+            ->name('polls.votes');
 
         Route::get('polls/{poll}/options/create', [AdminOptionController::class, 'create'])
             ->name('polls.options.create');
