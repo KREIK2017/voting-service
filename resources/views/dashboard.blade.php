@@ -23,45 +23,47 @@
         <div class="card shadow-sm mb-4">
             <div class="card-body">
                 <h2 class="h5">{{ __('messages.dashboard.admin_panel') }}</h2>
-                <p class="text-muted">{{ __('messages.dashboard.admin_intro') }}</p>
-                <div class="d-flex flex-wrap gap-2">
-                    <a href="{{ url('/admin/polls') }}" class="btn btn-primary">
-                        <i class="bi bi-bar-chart-line me-1"></i>{{ __('messages.dashboard.manage_polls') }}
-                    </a>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-outline-secondary">
-                        <i class="bi bi-gear me-1"></i>{{ __('messages.dashboard.profile_link') }}
-                    </a>
-                </div>
+                <p class="text-muted mb-0">{{ __('messages.dashboard.admin_intro') }}</p>
             </div>
         </div>
 
         <div class="row g-3">
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center">
-                        <div class="text-primary fs-1"><i class="bi bi-collection"></i></div>
-                        <div class="display-6 fw-bold">{{ \App\Models\Poll::count() }}</div>
-                        <div class="text-muted small">{{ __('polls.title') }}</div>
+                <a href="{{ route('admin.polls.create') }}" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div class="text-primary fs-1"><i class="bi bi-plus-square"></i></div>
+                            <div class="h5 fw-semibold mb-1">{{ __('messages.dashboard.cards.create_poll') }}</div>
+                            <div class="text-muted small">{{ __('polls.actions.create') }}</div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center">
-                        <div class="text-success fs-1"><i class="bi bi-list-check"></i></div>
-                        <div class="display-6 fw-bold">{{ \App\Models\Option::count() }}</div>
-                        <div class="text-muted small">{{ __('polls.fields.options') }}</div>
+                <a href="{{ route('admin.polls.index') }}" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div class="text-success fs-1"><i class="bi bi-collection"></i></div>
+                            <div class="h5 fw-semibold mb-1">{{ __('messages.dashboard.cards.all_polls') }}</div>
+                            <div class="text-muted small">
+                                {{ \App\Models\Poll::count() }} · {{ __('polls.title') }}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body text-center">
-                        <div class="text-info fs-1"><i class="bi bi-people"></i></div>
-                        <div class="display-6 fw-bold">{{ \App\Models\Vote::count() }}</div>
-                        <div class="text-muted small">{{ __('polls.results.total_votes', ['count' => '']) }}</div>
+                <a href="{{ route('admin.polls.index') }}" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-body text-center">
+                            <div class="text-info fs-1"><i class="bi bi-graph-up"></i></div>
+                            <div class="h5 fw-semibold mb-1">{{ __('messages.dashboard.cards.statistics') }}</div>
+                            <div class="text-muted small">
+                                {{ \App\Models\Vote::count() }} · {{ \App\Models\Option::count() }}
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     @else

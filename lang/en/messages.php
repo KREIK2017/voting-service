@@ -53,6 +53,11 @@ return [
         'my_votes_link' => 'My votes',
         'profile_link' => 'Profile settings',
         'verify_pending' => 'Verify your email to unlock all features.',
+        'cards' => [
+            'create_poll' => 'Create poll',
+            'all_polls' => 'All polls',
+            'statistics' => 'Statistics',
+        ],
     ],
 
     'home' => [
