@@ -16,11 +16,15 @@ class PollController extends Controller
 {
     public function index(Request $request): AnonymousResourceCollection
     {
-        Gate::authorize('viewAny', Poll::class);
+        // Allow public viewing without Gate check if we want public polls
+        // Gate::authorize('viewAny', Poll::class);
 
         $query = Poll::query()->withCount('votes');
 
-        if (! $request->user()->isAdmin()) {
+        if ($request->user() && $request->user()->isAdmin()) {
+            // Admin sees everything
+        } else {
+            // Guests and voters see only active polls
             $query->where('is_active', true);
         }
 

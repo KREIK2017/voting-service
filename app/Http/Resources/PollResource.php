@@ -26,7 +26,7 @@ class PollResource extends JsonResource
             'options' => OptionResource::collection($this->whenLoaded('options')),
             'user' => new UserResource($this->whenLoaded('user')),
 
-            'total_votes' => $this->resource->votes_count ?? $this->votes()->count(),
+            'votes_count' => $this->resource->votes_count ?? $this->votes()->count(),
             'user_has_voted' => $user ? $this->hasVoted($user) : false,
         ];
     }

@@ -7,12 +7,12 @@ use App\Models\User;
 
 class PollPolicy
 {
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, Poll $poll): bool
+    public function view(?User $user, Poll $poll): bool
     {
         return true;
     }

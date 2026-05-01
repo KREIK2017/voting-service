@@ -10,13 +10,14 @@ Route::prefix('v1')->group(function () {
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
 
+    Route::get('/polls', [PollController::class, 'index']);
+    Route::get('/polls/{poll}', [PollController::class, 'show']);
+    Route::get('/polls/{poll}/results', [PollController::class, 'results']);
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/me', [AuthController::class, 'me']);
 
-        Route::get('/polls', [PollController::class, 'index']);
-        Route::get('/polls/{poll}', [PollController::class, 'show']);
-        Route::get('/polls/{poll}/results', [PollController::class, 'results']);
         Route::post('/polls/{poll}/vote', [VoteController::class, 'vote']);
         Route::get('/my-votes', [VoteController::class, 'myVotes']);
 
