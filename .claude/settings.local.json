@@ -6,7 +6,10 @@
       "Bash(npm run *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "PowerShell(Get-Process | Where-Object { $_.ProcessName -match 'mysql' -or $_.ProcessName -match 'mariadb' -or $_.ProcessName -match 'xampp' } | Select-Object Id,ProcessName,StartTime | Format-Table -AutoSize)",
+      "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue; Get-Service | Where-Object { $_.Name -match 'mysql|mariadb' } | Format-Table Name,Status,StartType -AutoSize)",
+      "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue)"
     ]
   }
 }
