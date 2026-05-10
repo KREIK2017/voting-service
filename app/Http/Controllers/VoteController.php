@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Poll;
 use App\Models\Vote;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -113,5 +114,17 @@ class VoteController extends Controller
             ->paginate(15);
 
         return view('votes.my', compact('votes'));
+    }
+
+    public function resultsSql(Poll $poll): JsonResponse
+    {
+        $rows = DB::select('CALL sp_get_poll_results(?)', [$poll->id]);
+        $total = DB::selectOne('SELECT fn_poll_total_votes(?) AS total', [$poll->id])->total;
+
+        return response()->json([
+            'poll_id' => $poll->id,
+            'total_votes' => (int) $total,
+            'results' => $rows,
+        ]);
     }
 }

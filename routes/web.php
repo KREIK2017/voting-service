@@ -36,6 +36,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/polls/{poll}', [VoteController::class, 'show'])->name('polls.show');
     Route::post('/polls/{poll}/vote', [VoteController::class, 'vote'])->name('polls.vote');
     Route::get('/polls/{poll}/results', [VoteController::class, 'results'])->name('polls.results');
+    Route::get('/polls/{poll}/results-sql', [VoteController::class, 'resultsSql'])->name('polls.results.sql');
     Route::get('/my-votes', [VoteController::class, 'myVotes'])->name('votes.my');
 });
 

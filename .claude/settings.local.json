@@ -9,7 +9,10 @@
       "Bash(npm uninstall *)",
       "PowerShell(Get-Process | Where-Object { $_.ProcessName -match 'mysql' -or $_.ProcessName -match 'mariadb' -or $_.ProcessName -match 'xampp' } | Select-Object Id,ProcessName,StartTime | Format-Table -AutoSize)",
       "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue; Get-Service | Where-Object { $_.Name -match 'mysql|mariadb' } | Format-Table Name,Status,StartType -AutoSize)",
-      "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue)"
+      "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue)",
+      "PowerShell(Get-Process mysqld -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-NetTCPConnection -LocalPort 3306 -ErrorAction SilentlyContinue)",
+      "PowerShell(if \\(Test-Path \"C:\\\\xampp\\\\mysql\\\\data\"\\) { Copy-Item \"C:\\\\xampp\\\\mysql\\\\data\" \"C:\\\\xampp\\\\mysql\\\\data_backup_$\\(Get-Date -Format yyyyMMdd_HHmmss\\)\" -Recurse; Write-Output \"Backup done\" } else { Write-Output \"C:\\\\xampp\\\\mysql\\\\data not found - check your XAMPP install path\" })"
     ]
   }
 }
