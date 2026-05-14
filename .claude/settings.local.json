@@ -12,7 +12,15 @@
       "PowerShell(Test-NetConnection -ComputerName 127.0.0.1 -Port 3306 -InformationLevel Quiet -WarningAction SilentlyContinue)",
       "PowerShell(Get-Process mysqld -ErrorAction SilentlyContinue)",
       "PowerShell(Get-NetTCPConnection -LocalPort 3306 -ErrorAction SilentlyContinue)",
-      "PowerShell(if \\(Test-Path \"C:\\\\xampp\\\\mysql\\\\data\"\\) { Copy-Item \"C:\\\\xampp\\\\mysql\\\\data\" \"C:\\\\xampp\\\\mysql\\\\data_backup_$\\(Get-Date -Format yyyyMMdd_HHmmss\\)\" -Recurse; Write-Output \"Backup done\" } else { Write-Output \"C:\\\\xampp\\\\mysql\\\\data not found - check your XAMPP install path\" })"
+      "PowerShell(if \\(Test-Path \"C:\\\\xampp\\\\mysql\\\\data\"\\) { Copy-Item \"C:\\\\xampp\\\\mysql\\\\data\" \"C:\\\\xampp\\\\mysql\\\\data_backup_$\\(Get-Date -Format yyyyMMdd_HHmmss\\)\" -Recurse; Write-Output \"Backup done\" } else { Write-Output \"C:\\\\xampp\\\\mysql\\\\data not found - check your XAMPP install path\" })",
+      "Bash(py --version)",
+      "Bash(py -m pip --version)",
+      "Bash(py -m pip install selenium)",
+      "Bash(where chrome *)",
+      "Bash(reg query *)",
+      "PowerShell($chromePath = \\(Get-Item \"HKLM:\\\\SOFTWARE\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\App Paths\\\\chrome.exe\" -ErrorAction SilentlyContinue\\).GetValue\\(\"\"\\); if \\($chromePath\\) { Write-Output \"Chrome found: $chromePath\"; & $chromePath --version } else { Write-Output \"Chrome not found in standard location\" })",
+      "Bash(py test_success.py)",
+      "Bash(py test_fail.py)"
     ]
   }
 }
